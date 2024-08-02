@@ -18,24 +18,25 @@
 
     <!-- Main content -->
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid ">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body p-0">
+                            <div class="table-responsive">
 
-                            <table class="table-list  table table-bordered table-striped table-hover">
+                            <table class="table-list  table table-bordered table-striped table-hover maximized-card" style="max-width: 100%">
                                 <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>LOGO</th>
+{{--                                    <th>LOGO</th>--}}
                                     <th>Website</th>
                                     <th>Phone</th>
                                     <th>Address</th>
-                                    <th>Password</th>
+{{--                                    <th>Password</th>--}}
                                     <th>Screenshot time</th>
                                     <th>No. OF Employees</th>
                                     <th>Allowed Email</th>
@@ -49,11 +50,11 @@
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->email }}</td>
-                                        <td>{{ $company->logo }}</td>
+{{--                                        <td>{{ $company->logo }}</td>--}}
                                         <td>{{ $company->website }}</td>
                                         <td>{{ $company->phone }}</td>
                                         <td>{{ $company->address }}</td>
-                                        <td>{{ $company->password }}</td>
+{{--                                        <td>{{ $company->password }}</td>--}}
                                         <td>{{ $company->screenshot_time }}</td>
                                         <td>{{ $company->no_of_employees }}</td>
                                         <td>{{ $company->allowed_email }}</td>
@@ -69,6 +70,7 @@
                                 </tbody>
 
                             </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
@@ -83,8 +85,8 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-    <div class="modal fade" id="addCompanyModal" tabindex="-1" role="dialog" aria-labelledby="addCompanyModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade   " id="addCompanyModal" tabindex="-1" role="dialog" aria-labelledby="addCompanyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="addCompanyModalLabel">Add New Company</h5>
@@ -96,52 +98,72 @@
                     <form id="addCompanyForm" enctype="multipart/form-data">
                         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    <input type="text" class="form-control" id="website" name="website" placeholder="Website URL">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="allowed_email">Allowed Email</label>
+                                    <input type="text" class="form-control" id="allowed_email" name="allowed_email" placeholder="Allowed Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="logo">Logo</label>
                             <input type="file" class="form-control" id="logo" name="logo" placeholder="Logo URL" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="text" class="form-control" id="website" name="website" placeholder="Website URL">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="allowed_email">Allowed Email</label>
-                            <input type="text" class="form-control" id="allowed_email" name="allowed_email" placeholder="Allowed Email">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
                         </div>
                     </form>
                 </div>
@@ -158,6 +180,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- View Company Modal -->
     <div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="companyModalLabel" aria-hidden="true">
@@ -604,6 +627,9 @@
 
 
             })
+
+
+
 
         });
 

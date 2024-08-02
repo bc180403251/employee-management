@@ -98,6 +98,14 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         //
+        $companies=Company::where('status', true)->get();
+
+        $employee=Employee::find($id);
+
+        return response()->json([
+            'companies'=> $companies,
+            'employee' =>$employee
+        ]);
     }
 
     /**
@@ -106,6 +114,25 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $employee = Employee::find($id);
+
+        if (!$employee) {
+            return response()->json(['message' => 'Employee not found'], 404);
+        }
+
+        $employee->name = $request->input('name');
+        $employee->email = $request->input('email');
+        $employee->phone = $request->input('phone');
+        $employee->profile_img = $request->input('profile_img');
+        $employee->company_id = $request->input('company_id');
+        $employee->status = $request->input('status');
+
+        $employee->save();
+
+        return response()->json([
+            'message'=>'employee updated successfully!'
+        ]);
+
     }
 
     /**
@@ -114,5 +141,17 @@ class EmployeeController extends Controller
     public function destroy(string $id)
     {
         //
+        $employee=Employee::with('company')->find($id);
+
+        if($employee){
+            $employee->company->no_of_employees -= 1;
+
+            $employee->company->save();
+        }
+        $employee->delete();
+
+        return response()->json([
+            'message'=>'employee deleted successfully!'
+        ]);
     }
 }
