@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('monitor_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->nullable()->constrained('employees');
+            $table->foreignId('employee_id')->nullable()->constrained('employees')->onDelete('cascade');
             $table->string('images_url', 1000);
             $table->time('check_in_time');
             $table->time('check_out_time');

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('profile_img')->nullable();
             $table->boolean('status');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->foreignId('company_id')->nullable()->constrained('companies')->onDelete('cascade');
             $table->timestamps();
         });
     }

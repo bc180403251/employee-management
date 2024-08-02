@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('password');
             $table->time('screenshot_time')->nullable();
-            $table->integer('no_of_employees');
+            $table->integer('no_of_employees')->nullable();
             $table->string('allowed_email')->nullable();
             $table->boolean('status');
             $table->timestamps();
