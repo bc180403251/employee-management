@@ -33,7 +33,7 @@
                                     <th>Phone</th>
                                     <th>Company</th>
 {{--                                    <th>Profile</th>--}}
-                                    <th>Status</th>
+{{--                                    <th>Status</th>--}}
 {{--                                    <th>Password</th>--}}
                                     <th>Action</th>
                                 </tr>
@@ -47,7 +47,7 @@
                                         <td>{{ $employee->phone }}</td>
                                         <td>{{ $employee->company->name }}</td>
 {{--                                        <td>{{ $employee->profile_img }}</td>--}}
-                                        <td>{{ $employee->status }}</td>
+{{--                                        <td>{{ $employee->status }}</td>--}}
 {{--                                        <td>{{ $employee->password }}</td>--}}
 
                                         <td>
@@ -78,7 +78,7 @@
 {{--    add employee modal--}}
 
     <div class="modal fade " id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
@@ -89,57 +89,52 @@
                 <div class="modal-body">
                     <form id="addEmployeeForm" enctype="multipart/form-data">
                         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="profile">Profile</label>
-                            <input type="file" class="form-control" id="profile" name="file" placeholder="Profile URL" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <select class="form-control" id="company" name="company">
-                                <!-- Options will be populated by JavaScript -->
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="company">Company</label>
+                                <select class="form-control" id="company" name="company">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="profile">Profile</label>
+                                <input type="file" class="form-control" id="profile" name="file" placeholder="Profile URL" required>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div id="progress-container" class="progress" style="display: none;">
-                    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated m-auto" role="progressbar"
+                <div id="create-progress-container" class="progress mx-3" style="display: none;">
+                    <div id="create-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated m-auto" role="progressbar"
                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                         0%
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">Add Company</button>
+                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">Add Employee</button>
                 </div>
             </div>
         </div>
@@ -198,7 +193,7 @@
 
     <!-- Update Employee Modal -->
     <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="updateEmployeeModalLabel">Update Employee Details</h5>
@@ -211,48 +206,54 @@
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <input type="hidden" id="update-employee-id">
 
-                        <div class="form-group text-center">
-                            <img id="update-profile-img" src="" alt="Profile Image" class="img-thumbnail rounded" style="max-width: 150px">
-                            <input type="file" class="form-control mt-2" id="update-profile" name="profile_img">
-                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center mb-3">
+                                <img id="update-profile-img" src="" alt="Profile Image" class="img-thumbnail rounded" style="max-width: 150px;">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="update-name">Name</label>
-                            <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
-                        </div>
+                            <div class="col-md-6 form-group">
+                                <label for="update-name">Name</label>
+                                <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="update-email">Email</label>
-                            <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
-                        </div>
+                            <div class="col-md-6 form-group">
+                                <label for="update-email">Email</label>
+                                <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="update-phone">Phone</label>
-                            <input type="text" class="form-control" id="update-phone" name="phone" placeholder="Phone">
-                        </div>
+                            <div class="col-md-6 form-group">
+                                <label for="update-phone">Phone</label>
+                                <input type="text" class="form-control" id="update-phone" name="phone" placeholder="Phone">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="update-company">Company</label>
-                            <select class="form-control" id="update-company" name="company">
-                                <!-- Options will be populated by JavaScript -->
-                            </select>
-                        </div>
+                            <div class="col-md-6 form-group">
+                                <label for="update-company">Company</label>
+                                <select class="form-control" id="update-company" name="company">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="update-password">Password</label>
-                            <input type="password" class="form-control" id="update-password" name="password" placeholder="Password">
-                        </div>
+                            <div class="col-md-6 form-group">
+                                <label for="update-password">Password</label>
+                                <input type="password" class="form-control" id="update-password" name="password" placeholder="Password">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="update-status">Status</label>
-                            <select class="form-control" id="update-status" name="status">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
+                            <div class="col-md-6 form-group">
+                                <label for="update-status">Status</label>
+                                <select class="form-control" id="update-status" name="status">
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 form-group">
+                                <label for="update-profile">Update Profile Image</label>
+                                <input type="file" class="form-control" id="update-profile" name="profile_img">
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div id="update-progress-container" class="progress" style="display: none;">
+                <div id="update-progress-container" class="progress mx-3" style="display: none;">
                     <div id="update-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated m-auto" role="progressbar"
                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                         0%
@@ -265,6 +266,7 @@
             </div>
         </div>
     </div>
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -288,6 +290,49 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const storage = getStorage(app);
+
+        function handleFileUpload(file, onComplete, updateProgress) {
+
+            const storageRef = ref(storage, 'employee/logos/' + file.name);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            let progressInterval;
+
+
+
+            uploadTask.on('state_changed',
+                function (snapshot) {
+                    clearInterval(progressInterval);
+                    progressInterval = setInterval(() => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        updateProgress(progress);
+                    }, 200);
+                },
+                function (error) {
+                    clearInterval(progressInterval);
+                    console.error('Upload failed', error);
+                },
+                async function () {
+                    clearInterval(progressInterval);
+                    updateProgress(100);
+                    const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                    onComplete(downloadURL);
+                }
+            );
+        }
+        function showErrors(errors) {
+            // Hide all previous errors
+            $('.form-group').find('.text-danger').remove();
+            $('.is-invalid').removeClass('is-invalid');
+
+            // Display errors
+            $.each(errors, function (field, message) {
+                const input = $('#' + field);
+                input.addClass('is-invalid');
+                input.after('<div class="text-danger">' + message + '</div>');
+            });
+        }
+
 
         $(document).ready(function() {
             $('#addEmployeeModal').on('show.bs.modal', function (event) {
@@ -313,79 +358,99 @@
                         });
                     },
                     error: function (error) {
-                        console.log('Error fetching companies:', error);
+                        alert('Error fetching companies:'+ error.setText);
+
                     }
                 });
             });
             $('#saveEmployeeBtn').click(async function(e){
                 e.preventDefault()
 
-                $('#progress-container').show();
+
 
                 const file = document.getElementById('profile').files[0];
-                const storageRef = ref(storage, 'employees/profile/' + file.name);
-                const uploadTask = uploadBytesResumable(storageRef, file);
 
-                let profile='';
 
-                function updateProgress(progress){
-                    const progressBar=document.getElementById('progress-bar');
-                    progressBar.style.width= progress + '%';
-                    progressBar.setAttribute('aria-vluesnow', progress);
-                    progressBar.innerText= Math.round(progress)+'%'
+                if(file){
+                    $('#create-progress-container').show();
+
+                    function updateProgress(progress) {
+                        const progressBar = document.getElementById('create-progress-bar');
+
+                        progressBar.style.width = progress + '%';
+                        progressBar.setAttribute('aria-valuenow', progress);
+                        progressBar.innerText = Math.round(progress) + '%';
+                    }
+
+                  const onComplete = async (profile) =>{
+
+                    let data = {
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+                        phone: $('#phone').val(),
+                        password: $('#password').val(),
+                        profile_img: profile,
+                        company_id: $('#company').val(),
+                        status: $('#status').val(),
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    }
+                    // console.log(data);
+
+                    $.ajax({
+                        url: '{{ route("employees.create") }}',
+                        type: 'POST',
+                        data: data,
+                        success: function (response) {
+                            console.log(response);
+                            $('#addEmployeeModal').modal('hide');
+                            location.reload()
+
+                        },
+                        error: function (error) {
+                            if (error.responseJSON && error.responseJSON.errors) {
+                            showErrors(error.responseJSON.errors);
+                            } else {
+                            alert('An error occurred: ' + error.statusText);
+                            }
+
+                        }
+                    })
+
+
+                  };
+                  await handleFileUpload(file, onComplete,updateProgress)
+                }else{
+                    let data = {
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+                        phone: $('#phone').val(),
+                        password: $('#password').val(),
+                        company_id: $('#company').val(),
+                        status: $('#status').val(),
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    }
+
+                    $.ajax({
+                        url: '{{ route("employees.create") }}',
+                        type: 'POST',
+                        data: data,
+                        success: function (response) {
+                            console.log(response);
+                            $('#addEmployeeModal').modal('hide');
+                            location.reload()
+
+                        },
+                        error: function (error) {
+                            if (error.responseJSON && error.responseJSON.errors) {
+                                showErrors(error.responseJSON.errors);
+                            } else {
+                                alert('An error occurred: ' + error.statusText);
+                            }
+
+                        }
+                    })
 
                 }
-                let progressInterval;
-
-                uploadTask.on('state_changed',
-                    function (snapshot) {
-                        clearInterval(progressInterval);
-                        progressInterval=setInterval(()=>{
-                            const progress=(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            updateProgress(progress);
-                        },200);
-
-                    },
-                    function (error){
-                        clearInterval(progressInterval);
-                        console.error('upload failed', error)
-
-                    },
-                    async  function () {
-                        clearInterval(progressInterval);
-                        updateProgress(100);
-                        profile= await getDownloadURL(uploadTask.snapshot.ref);
-
-                        let data={
-                            name : $('#name').val(),
-                            email :$('#email').val(),
-                            phone : $('#phone').val(),
-                            password:$('#password').val(),
-                            profile_img: profile,
-                            company_id:$('#company').val(),
-                            status:$('#status').val(),
-                            _token : $('meta[name="csrf-token"]').attr('content')
-                        }
-                        console.log(data);
-
-                        $.ajax({
-                            url: '{{ route("employees.create") }}',
-                            type: 'POST',
-                            data: data,
-                            success: function(response){
-                                console.log(response);
-                                $('#addEmployeeModal').modal('hide');
-                                location.reload()
-
-                            },
-                            error: function(error){
-                                console.log(error);
-                            }
-                        })
-
-
-                    }
-                )
 
             })
             $('#viewEmployeeModal').on('show.bs.modal', function (event) {
@@ -407,7 +472,7 @@
                         $('#view-status').text(employee.status ? 'Active' : 'Inactive');
                     },
                     error: function (error) {
-                        console.log('Error fetching employee details:', error);
+                        alert('Error fetching employee details:'+ error.setText);
                     }
                 });
             });
@@ -415,7 +480,7 @@
                 // e.preventDefault();
 
                 const employeeId = $(this).data('id');
-                console.log(employeeId)
+                // console.log(employeeId)
 
                 if (confirm('Are you sure you want to delete this employee?')) {
                     $.ajax({
@@ -431,8 +496,8 @@
                             // alert('Employee deleted successfully.');
                         },
                         error: function(error) {
-                            console.error('Error deleting employee:', error);
-                            alert('An error occurred while deleting the employee.');
+                            // console.error('Error deleting employee:', error);
+                            alert('An error occurred while deleting the employee.'+ error.setText);
                         }
                     });
                 }
@@ -473,7 +538,7 @@
                         });
                     },
                     error: function (error) {
-                        console.log('Error fetching employee details for update:', error);
+                        alert('Error fetching employee details for update:'+ error.setText);
                     }
                 });
             });
@@ -494,66 +559,54 @@
                 if(newProfile){
                     $('#update-progress-container').show();
 
-                    const file = newProfile;
-                    const storageRef = ref(storage, 'employees/profile/' + file.name);
-                    const uploadTask = uploadBytesResumable(storageRef, file);
-
-
-
-                    function updateProgress(progress){
-                        const progressBar=document.getElementById('update-progress-bar');
-                        progressBar.style.width= progress + '%';
-                        progressBar.setAttribute('aria-vluesnow', progress);
-                        progressBar.innerText= Math.round(progress)+'%'
-
+                    function updateProgress(progress) {
+                        const progressBar = document.getElementById('update-progress-bar');
+                        if(!progressBar){
+                            alert('bar not found')
+                        }
+                        progressBar.style.width = progress + '%';
+                        progressBar.setAttribute('aria-valuenow', progress);
+                        progressBar.innerText = Math.round(progress) + '%';
                     }
-                    let progressInterval;
 
-                    uploadTask.on('state_changed',
-                        function (snapshot) {
-                            clearInterval(progressInterval);
-                            progressInterval=setInterval(()=>{
-                                const progress=(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                                updateProgress(progress);
-                            },200);
 
-                        },
-                        function (error){
-                            clearInterval(progressInterval);
-                            console.error('upload failed', error)
+                        const file = newProfile;
 
-                        },
-                        async function() {
-                            clearInterval(progressInterval);
-                            updateProgress(100);
-                            const logo = await getDownloadURL(uploadTask.snapshot.ref);
+                        const onComplete=async (Profile)=> {
 
-                            let data={
-                                profile_img: logo,
-                                name:name,
-                                email:email,
-                                phone:phone,
-                                company_id:company,
-                                status:status,
-                                _token : $('meta[name="csrf-token"]').attr('content'),
-                                _method:'PATCH'
+                            let data = {
+                                profile_img: Profile,
+                                name: name,
+                                email: email,
+                                phone: phone,
+                                company_id: company,
+                                status: status,
+                                _token: $('meta[name="csrf-token"]').attr('content'),
+                                _method: 'PATCH'
                             }
                             $.ajax({
-                                url:`{{ url('employees/update') }}/${id}`,
-                                method:'POST',
-                                data:data,
-                                success:function (response) {
+                                url: `{{ url('employees/update') }}/${id}`,
+                                method: 'POST',
+                                data: data,
+                                success: function (response) {
                                     console.log(response)
                                     $('#updateEmployeeModal').modal('hide');
                                     location.reload();
 
                                 },
-                                error: function (error){
-                                    console.log(error)
+                                error: function (error) {
+                                    if (error.responseJSON && error.responseJSON.errors) {
+                                        showErrors(error.responseJSON.errors);
+                                    } else {
+                                        alert('An error occurred: ' + error.statusText);
+                                    }
                                 }
 
                             })
-                        })
+
+                        }
+                        handleFileUpload(file, onComplete,updateProgress)
+
 
                 }else{
                     let data={
@@ -577,7 +630,11 @@
                             location.reload();
                         },
                         error:function (error) {
-                            console.log(error)
+                            if (error.responseJSON && error.responseJSON.errors) {
+                                showErrors(error.responseJSON.errors);
+                            } else {
+                                alert('An error occurred: ' + error.statusText);
+                            }
 
                         }
                     })

@@ -37,10 +37,10 @@
                                     <th>Phone</th>
                                     <th>Address</th>
 {{--                                    <th>Password</th>--}}
-                                    <th>Screenshot time</th>
+{{--                                    <th>Screenshot time</th>--}}
                                     <th>No. OF Employees</th>
-                                    <th>Allowed Email</th>
-                                    <th>Status</th>
+{{--                                    <th>Allowed Email</th>--}}
+{{--                                    <th>Status</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -55,10 +55,10 @@
                                         <td>{{ $company->phone }}</td>
                                         <td>{{ $company->address }}</td>
 {{--                                        <td>{{ $company->password }}</td>--}}
-                                        <td>{{ $company->screenshot_time }}</td>
+{{--                                        <td>{{ $company->screenshot_time }}</td>--}}
                                         <td>{{ $company->no_of_employees }}</td>
-                                        <td>{{ $company->allowed_email }}</td>
-                                        <td>{{ $company->status }}</td>
+{{--                                        <td>{{ $company->allowed_email }}</td>--}}
+{{--                                        <td>{{ $company->status }}</td>--}}
                                         <td>
                                             <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#companyModal" data-action="view" data-id="{{ $company->id }}">View</button>
                                             <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" data-target="#updateCompanyModal" data-action="update" data-id="{{ $company->id }}">Update</button>
@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="allowed_email">Allowed Email</label>
+                                    <label for="allowed_email">Allowed Email(OPTIONAL)</label>
                                     <input type="text" class="form-control" id="allowed_email" name="allowed_email" placeholder="Allowed Email">
                                 </div>
                             </div>
@@ -162,13 +162,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="logo">Logo</label>
+                            <label for="logo">Logo(OPTIONAL)</label>
                             <input type="file" class="form-control" id="logo" name="logo" placeholder="Logo URL" required>
                         </div>
                     </form>
                 </div>
-                <div id="progress-container" class="progress" style="display: none;">
-                    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                <div id="create-progress-container" class="progress mx-3" style="display: none;">
+                    <div id="create-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                         0%
                     </div>
@@ -184,7 +184,7 @@
 
     <!-- View Company Modal -->
     <div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="companyModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="companyModalLabel">View Company</h5>
@@ -245,8 +245,9 @@
     </div>
 
     <!-- Update Company Modal -->
+    <!-- Update Company Modal -->
     <div class="modal fade" id="updateCompanyModal" tabindex="-1" role="dialog" aria-labelledby="updateCompanyModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="updateCompanyModalLabel">Update Company</h5>
@@ -259,60 +260,71 @@
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <input type="hidden" id="update-company-id" name="id">
 
+
                         <div class="form-group text-center">
                             <img id="update-logo" class="img-thumbnail rounded" style="max-width: 150px;" src="" alt="Logo">
                         </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="update-name">Name</label>
+                                <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="update-email">Email</label>
+                                <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="update-website">Website</label>
+                                <input type="text" class="form-control" id="update-website" name="website" placeholder="Website URL">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="update-phone">Phone</label>
+                                <input type="text" class="form-control" id="update-phone" name="phone" placeholder="Phone">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="update-address">Address</label>
+                                <input type="text" class="form-control" id="update-address" name="address" placeholder="Address">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="update-password">Password</label>
+                                <input type="password" class="form-control" id="update-password" name="password" placeholder="Password" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="update-allowed_email">Allowed Email</label>
+                                <input type="text" class="form-control" id="update-allowed_email" name="allowed_email" placeholder="Allowed Email">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="update-status">Status</label>
+                                <select class="form-control" id="update-status" name="status">
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group">
                             <label for="update-logo-input">New Logo (optional)</label>
                             <input type="file" class="form-control" id="update-logo-input" name="logo">
                         </div>
-
-                        <div class="form-group">
-                            <label for="update-name">Name</label>
-                            <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-email">Email</label>
-                            <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-website">Website</label>
-                            <input type="text" class="form-control" id="update-website" name="website" placeholder="Website URL">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-phone">Phone</label>
-                            <input type="text" class="form-control" id="update-phone" name="phone" placeholder="Phone">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-address">Address</label>
-                            <input type="text" class="form-control" id="update-address" name="address" placeholder="Address">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-password">Password</label>
-                            <input type="password" class="form-control" id="update-password" name="password" placeholder="Password" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-allowed_email">Allowed Email</label>
-                            <input type="text" class="form-control" id="update-allowed_email" name="allowed_email" placeholder="Allowed Email">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update-status">Status</label>
-                            <select class="form-control" id="update-status" name="status">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
                     </form>
                 </div>
-                <div id="update-progress-container" class="progress" style="display: none;">
+                <div id="update-progress-container" class="progress mx-3" style="display: none;">
                     <div id="update-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                         0%
@@ -325,6 +337,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 
@@ -350,80 +364,157 @@
         const app = initializeApp(firebaseConfig);
         const storage = getStorage(app);
 
+        function handleFileUpload(file, onComplete, updateProgress) {
+            // console.log(containerId)
+
+            const storageRef = ref(storage, 'companies/logos/' + file.name);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            let progressInterval;
+
+            // function updateProgress(progress) {
+            //     // console.log(progressId)
+            //     const progressBar = document.getElementById('create-progress-bar');
+            //     console.log('barr'+progressBar)
+            //     // if (!progressBar) {
+            //     //     console.error('Progress bar element not found:', progressId);
+            //     //     return;
+            //     // }
+            //     progressBar.style.width = progress + '%';
+            //     progressBar.setAttribute('aria-valuenow', progress);
+            //     progressBar.innerText = Math.round(progress) + '%';
+            // }
+
+            uploadTask.on('state_changed',
+                function (snapshot) {
+                    clearInterval(progressInterval);
+                    progressInterval = setInterval(() => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        updateProgress(progress);
+                    }, 200);
+                },
+                function (error) {
+                    clearInterval(progressInterval);
+                    console.error('Upload failed', error);
+                },
+                async function () {
+                    clearInterval(progressInterval);
+                    updateProgress(100);
+                    const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                    onComplete(downloadURL);
+                }
+            );
+        }
+        function showErrors(errors) {
+            // Hide all previous errors
+            $('.form-group').find('.text-danger').remove();
+            $('.is-invalid').removeClass('is-invalid');
+
+            // Display errors
+            $.each(errors, function (field, message) {
+                const input = $('#' + field);
+                input.addClass('is-invalid');
+                input.after('<div class="text-danger">' + message + '</div>');
+            });
+        }
+
         $(document).ready(function (){
-                $('#saveCompanyBtn').click( async function (e){
+                $('#saveCompanyBtn').click( async function (e) {
                     e.preventDefault()
-                    $('#progress-container').show();
 
-                    const file = document.getElementById('logo').files[0];
-                    const storageRef = ref(storage, 'companies/logos/' + file.name);
-                    const uploadTask = uploadBytesResumable(storageRef, file);
+                    const file=$('#logo')[0].files[0]
 
-                    let logo='';
+                    if(file){
+                        $('#create-progress-container').show();
+                        function updateProgress(progress) {
+                            const progressBar = document.getElementById('create-progress-bar');
+                            console.log(progressBar)
 
-                    function updateProgress(progress){
-                        const progressBar=document.getElementById('progress-bar');
-                        progressBar.style.width= progress + '%';
-                        progressBar.setAttribute('aria-vluesnow', progress);
-                        progressBar.innerText= Math.round(progress)+'%'
+                            progressBar.style.width = progress + '%';
+                            progressBar.setAttribute('aria-valuenow', progress);
+                            progressBar.innerText = Math.round(progress) + '%';
+                        }
+                     const onComplete=async (logo)=> {
+
+
+                        const data = {
+
+                            name: $('#name').val(),
+                            email: $('#email').val(),
+                            phone: $('#phone').val(),
+                            address: $('#address').val(),
+                            website: $('#website').val(),
+                            password: $('#password').val(),
+                            allowed_email: $('#allowed_email').val(),
+                            status: $('#status').val(),
+                            logo: logo,
+                            _token: $('meta[name="csrf-token"]').attr('content')
+
+                        }
+                        // console.log(data)
+                        $.ajax({
+                            url: '{{ route("companies.create") }}',
+                            type: 'POST',
+                            data: data,
+                            success: function (response) {
+                                // console.log(response);
+                                $('#addCompanyModal').modal('hide');
+                                location.reload()
+
+                            },
+                            error: function (error) {
+                                if (error.responseJSON && error.responseJSON.errors) {
+                                    showErrors(error.responseJSON.errors);
+                                } else {
+                                    alert('An error occurred: ' + error.statusText);
+                                }
+                            }
+                        });
+
+                      }
+                    // let containerID=document.getElementById('create-progress-container')'
+                       await handleFileUpload(file, onComplete, updateProgress)
+                    }else{
+                        const data = {
+
+                            name: $('#name').val(),
+                            email: $('#email').val(),
+                            phone: $('#phone').val(),
+                            address: $('#address').val(),
+                            website: $('#website').val(),
+                            password: $('#password').val(),
+                            allowed_email: $('#allowed_email').val(),
+                            status: $('#status').val(),
+
+                            _token: $('meta[name="csrf-token"]').attr('content')
+
+                        }
+
+                        $.ajax({
+                            url: '{{ route("companies.create") }}',
+                            type: 'POST',
+                            data: data,
+                            success: function (response) {
+                                // console.log(response);
+                                $('#addCompanyModal').modal('hide');
+                                location.reload()
+
+                            },
+                            error: function (error) {
+                                console.log(error)
+                                if (error.responseJSON && error.responseJSON.errors) {
+                                    showErrors(error.responseJSON.errors);
+                                } else {
+                                    alert('An error occurred: ' + error.statusText);
+                                }
+                            }
+                        });
 
                     }
-                    let progressInterval;
 
-                    uploadTask.on('state_changed',
-                        function (snapshot) {
-                        clearInterval(progressInterval);
-                        progressInterval=setInterval(()=>{
-                            const progress=(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            updateProgress(progress);
-                        },200);
-
-                        },
-                        function (error){
-                        clearInterval(progressInterval);
-                        console.error('upload failed', error)
-
-                        },
-                        async function(){
-                        clearInterval(progressInterval);
-                        updateProgress(100);
-                        logo=await getDownloadURL(uploadTask.snapshot.ref);
-
-                        const data={
-                            logo:logo,
-                            name : $('#name').val(),
-                             email :$('#email').val(),
-                             phone : $('#phone').val(),
-                            address : $('#address').val(),
-                            website : $('#website').val(),
-                            password : $('#password').val(),
-                            allowed_email : $('#allowed_email').val(),
-                            status : $('#status').val(),
-                             _token : $('meta[name="csrf-token"]').attr('content')
-
-                        }
-                        console.log(data)
-                            $.ajax({
-                                url: '{{ route("companies.create") }}',
-                                type: 'POST',
-                                data: data,
-                                success: function(response){
-                                    console.log(response);
-                                    $('#addCompanyModal').modal('hide');
-                                    location.reload()
-
-                                },
-                                error: function(error){
-                                    console.log(error);
-                                }
-                            });
-
-                        }
+                });
 
 
-                    )
-
-            });
             $('#companyModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 var action = button.data('action');
@@ -454,7 +545,7 @@
                             }
                         },
                         error: function (error) {
-                            console.log(error);
+                            alert('error in fetching data'+error.setText);
                         }
                     });
                 }
@@ -469,12 +560,16 @@
                             _token: '{{csrf_token()}}'
                         },
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
                         //     remove the row from table
                             $('Company-', companyId).remove();
                             location.reload()
 
                         },
+                        error:function (error) {
+                            alert('error in deleting the company'+ error.setText)
+
+                        }
 
                     })
                 }
@@ -508,7 +603,7 @@
                         }
                     },
                     error: function (error) {
-                        console.log(error);
+                        alert('error in  getting data'+error.setText);
                     }
                 });
             });
@@ -530,44 +625,24 @@
 
                    let newLogo=$('#update-logo-input')[0].files[0];
                    if(newLogo){
-                       $('#update-progress-container').show();
+                       $('#create-progress-container').show();
+                       function updateProgress(progress) {
+                           const progressBar = document.getElementById('create-progress-bar');
+                           console.log(progressBar)
+
+                           progressBar.style.width = progress + '%';
+                           progressBar.setAttribute('aria-valuenow', progress);
+                           progressBar.innerText = Math.round(progress) + '%';
+                       }
+
 
                        const file = newLogo;
-                       const storageRef = ref(storage, 'companies/logos/' + file.name);
-                       const uploadTask = uploadBytesResumable(storageRef, file);
 
+                          const onComplete= async (logo)=> {
 
-
-                       function updateProgress(progress){
-                           const progressBar=document.getElementById('progress-bar');
-                           progressBar.style.width= progress + '%';
-                           progressBar.setAttribute('aria-vluesnow', progress);
-                           progressBar.innerText= Math.round(progress)+'%'
-
-                       }
-                       let progressInterval;
-
-                       uploadTask.on('state_changed',
-                           function (snapshot) {
-                               clearInterval(progressInterval);
-                               progressInterval=setInterval(()=>{
-                                   const progress=(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                                   updateProgress(progress);
-                               },200);
-
-                           },
-                           function (error){
-                               clearInterval(progressInterval);
-                               console.error('upload failed', error)
-
-                           },
-                           async function() {
-                               clearInterval(progressInterval);
-                               updateProgress(100);
-                              const logo = await getDownloadURL(uploadTask.snapshot.ref);
 
                                let data={
-                                   logo: logo,
+
                                    name:name,
                                    email:email,
                                    address:address,
@@ -575,6 +650,7 @@
                                    website:website,
                                    allowed_email:allowed_email,
                                    status:status,
+                                   logo: logo,
                                    _token : $('meta[name="csrf-token"]').attr('content'),
                                    _method:'PATCH'
                                }
@@ -583,21 +659,27 @@
                                    method:'POST',
                                    data:data,
                                    success:function (response) {
-                                       console.log(response)
+                                       // console.log(response)
                                        $('#updateCompanyModal').modal('hide');
                                        location.reload();
 
                                    },
                                    error: function (error){
-                                       console.log(error)
+                                       if (error.responseJSON && error.responseJSON.errors) {
+                                           showErrors(error.responseJSON.errors);
+                                       } else {
+                                           alert('An error occurred: ' + error.statusText);
+                                       }
                                    }
 
                                })
-                           })
+                           };
+
+                         await handleFileUpload(file, onComplete, updateProgress)
 
                    }else{
                        let data={
-                           logo: logo,
+
                            name:name,
                            email:email,
                            address:address,
@@ -605,6 +687,7 @@
                            website:website,
                            allowed_email:allowed_email,
                            status:status,
+                           logo: logo,
                            _token : $('meta[name="csrf-token"]').attr('content'),
                            _method:'PATCH'
 
@@ -619,7 +702,11 @@
                                location.reload();
                            },
                            error:function (error) {
-                               console.log(error)
+                               if (error.responseJSON && error.responseJSON.errors) {
+                                   showErrors(error.responseJSON.errors);
+                               } else {
+                                   alert('An error occurred: ' + error.statusText);
+                               }
 
                            }
                        })

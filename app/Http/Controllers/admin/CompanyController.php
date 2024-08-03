@@ -46,7 +46,7 @@ class CompanyController extends Controller
         $request->validate([
             'name'             => 'required|string|max:255',
             'email'            => 'required|string|email|max:255',
-            'logo'             => 'required|string|max:255',
+            'logo'             => 'string|max:255',
             'website'          => 'required|string|max:255',
             'phone'            => 'required|string|max:20',
             'address'          => 'required|string|max:255',
@@ -59,7 +59,7 @@ class CompanyController extends Controller
         ]);
 
 //        $status=null;
-        if($request->input('active')){
+        if($request->input('status')==='active'){
             $status=true;
         }else{
             $status=false;
@@ -70,12 +70,13 @@ class CompanyController extends Controller
         $company=new Company();
         $company->name = $request->input('name');
         $company->email = $request->input('email');
-        $company->logo = $request->input('logo');
+
         $company->phone = $request->input('phone');
         $company->address = $request->input('address');
         $company->website= $request->input('website');
         $company->password = $password;
         $company->allowed_email=$request->input('allowed_email');
+        $company->logo = $request->input('logo');
         $company->status=$status;
 
         $company->save();

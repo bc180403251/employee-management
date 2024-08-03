@@ -47,7 +47,7 @@ class EmployeeController extends Controller
             'email'            => 'required|email|unique:employees,email',
             'phone'            => 'required|string|max:20',
             'password'         => 'required|string',
-            'profile_img'    => 'required|string',
+            'profile_img'    => 'string',
             'status'           => 'required',
         ]);
 
