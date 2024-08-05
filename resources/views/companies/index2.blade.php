@@ -32,15 +32,10 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-{{--                                    <th>LOGO</th>--}}
                                     <th>Website</th>
                                     <th>Phone</th>
                                     <th>Address</th>
-{{--                                    <th>Password</th>--}}
-{{--                                    <th>Screenshot time</th>--}}
                                     <th>No. OF Employees</th>
-{{--                                    <th>Allowed Email</th>--}}
-{{--                                    <th>Status</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -50,20 +45,15 @@
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->email }}</td>
-{{--                                        <td>{{ $company->logo }}</td>--}}
                                         <td>{{ $company->website }}</td>
                                         <td>{{ $company->phone }}</td>
                                         <td>{{ $company->address }}</td>
-{{--                                        <td>{{ $company->password }}</td>--}}
-{{--                                        <td>{{ $company->screenshot_time }}</td>--}}
                                         <td>{{ $company->no_of_employees }}</td>
-{{--                                        <td>{{ $company->allowed_email }}</td>--}}
-{{--                                        <td>{{ $company->status }}</td>--}}
                                         <td>
                                             <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#companyModal" data-action="view" data-id="{{ $company->id }}">View</button>
                                             <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" data-target="#updateCompanyModal" data-action="update" data-id="{{ $company->id }}">Update</button>
                                             <button type="button" class="btn btn-danger btn-sm mx-1 delete-btn" data-company-id="{{ $company->id }}">{{ __('Delete') }}</button>
-{{--                                            <button type="button" class="btn btn-danger btn-sm m-1" data-id="{{ $company->id }}" onclick="deleteCompany({{ $company->id }})">Delete</button>--}}
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -184,7 +174,7 @@
 
     <!-- View Company Modal -->
     <div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="companyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog mdal" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="companyModalLabel">View Company</h5>
@@ -193,48 +183,74 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group text-center">
-                        <img id="view-logo" class="img-thumbnail rounded" style="max-width: 150px;" src="" alt="Logo">
-                    </div>
-                    <div class="form-group">
-                        <label for="view-name">Name</label>
-                        <p id="view-name"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-email">Email</label>
-                        <p id="view-email"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-website">Website</label>
-                        <p id="view-website"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-phone">Phone</label>
-                        <p id="view-phone"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-address">Address</label>
-                        <p id="view-address"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-password">Password</label>
-                        <p id="view-password"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-screenshot_time">Screenshot Time</label>
-                        <p id="view-screenshot_time"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-no_of_employees">No. Of Employees</label>
-                        <p id="view-no_of_employees"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-allowed_email">Allowed Email</label>
-                        <p id="view-allowed_email"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="view-status">Status</label>
-                        <p id="view-status"></p>
+                    <div class="d-flex">
+                        <!-- Content area on the left -->
+                        <div class="flex-grow-1">
+                            <div class="form-group">
+                                <label for="view-name">Name</label>
+                                <p id="view-name" class="form-control-plaintext"></p>
+                            </div>
+                            <!-- Email Field -->
+                            <div class="form-group">
+                                <label for="view-email">Email</label>
+                                <p id="view-email" class="form-control-plaintext"></p>
+                            </div>
+                            <!-- Additional fields -->
+                            <div class="row mt-lg-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-website">Website</label>
+                                        <p id="view-website" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-phone">Phone</label>
+                                        <p id="view-phone" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-address">Address</label>
+                                        <p id="view-address" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-screenshot_time">Screenshot Time</label>
+                                        <p id="view-screenshot_time" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-no_of_employees">No. Of Employees</label>
+                                        <p id="view-no_of_employees" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-allowed_email">Allowed Email</label>
+                                        <p id="view-allowed_email" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="view-status">Status</label>
+                                        <p id="view-status" class="form-control-plaintext"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image on the right top -->
+                        <div class="d-flex flex-column align-items-center" style="position: relative">
+                            <img id="view-logo" class="img-thumbnail rounded" style="max-width: 150px; position: absolute; top: 0; right: 0; margin-right: 50px", src="" alt="Logo">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -244,7 +260,9 @@
         </div>
     </div>
 
-    <!-- Update Company Modal -->
+
+
+
     <!-- Update Company Modal -->
     <div class="modal fade" id="updateCompanyModal" tabindex="-1" role="dialog" aria-labelledby="updateCompanyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -260,20 +278,25 @@
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <input type="hidden" id="update-company-id" name="id">
 
+                        <div class="d-flex align-items-start">
+                            <!-- Text Fields Area (Top Left and Top Right) -->
+                            <div class="d-flex flex-column flex-grow-1">
+                                <div class="form-group">
+                                    <label for="update-name">Name</label>
+                                    <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
+                                </div>
 
-                        <div class="form-group text-center">
-                            <img id="update-logo" class="img-thumbnail rounded" style="max-width: 150px;" src="" alt="Logo">
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="update-name">Name</label>
-                                <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
+                                <div class="form-group">
+                                    <label for="update-email">Email</label>
+                                    <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
+                                </div>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="update-email">Email</label>
-                                <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
+                            <!-- Image Area (Right Side) -->
+                            <div class="ml-3">
+                                <div class="form-group text-center">
+                                    <img id="update-logo" class="img-thumbnail rounded" style="max-width: 200px; margin-right: 35px" src="" alt="Logo">
+                                </div>
                             </div>
                         </div>
 
@@ -296,17 +319,12 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="update-password">Password</label>
-                                <input type="password" class="form-control" id="update-password" name="password" placeholder="Password" disabled>
+                                <label for="update-allowed_email">Allowed Email</label>
+                                <input type="text" class="form-control" id="update-allowed_email" name="allowed_email" placeholder="Allowed Email">
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="update-allowed_email">Allowed Email</label>
-                                <input type="text" class="form-control" id="update-allowed_email" name="allowed_email" placeholder="Allowed Email">
-                            </div>
-
                             <div class="form-group col-md-6">
                                 <label for="update-status">Status</label>
                                 <select class="form-control" id="update-status" name="status">
@@ -314,14 +332,14 @@
                                     <option value="inactive">Inactive</option>
                                 </select>
                             </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="update-logo-input">New Logo (optional)</label>
+                                <input type="file" class="form-control" id="update-logo-input" name="logo">
+                            </div>
                         </div>
 
 
-
-                        <div class="form-group">
-                            <label for="update-logo-input">New Logo (optional)</label>
-                            <input type="file" class="form-control" id="update-logo-input" name="logo">
-                        </div>
                     </form>
                 </div>
                 <div id="update-progress-container" class="progress mx-3" style="display: none;">
@@ -338,6 +356,26 @@
         </div>
     </div>
 
+
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this company?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -372,18 +410,7 @@
 
             let progressInterval;
 
-            // function updateProgress(progress) {
-            //     // console.log(progressId)
-            //     const progressBar = document.getElementById('create-progress-bar');
-            //     console.log('barr'+progressBar)
-            //     // if (!progressBar) {
-            //     //     console.error('Progress bar element not found:', progressId);
-            //     //     return;
-            //     // }
-            //     progressBar.style.width = progress + '%';
-            //     progressBar.setAttribute('aria-valuenow', progress);
-            //     progressBar.innerText = Math.round(progress) + '%';
-            // }
+
 
             uploadTask.on('state_changed',
                 function (snapshot) {
@@ -418,22 +445,117 @@
             });
         }
 
+        function clearErrors(){
+            $('.form-group').find('.text-danger').remove();
+            $('.is-invalid').removeClass('is-invalid');
+        }
+
+        function validateForm() {
+            let valid=true;
+            let errors={};
+
+            const name = $('#name').val().trim();
+            const email = $('#email').val().trim();
+            const website = $('#website').val().trim();
+            const phone = $('#phone').val().trim();
+            const address = $('#address').val().trim();
+            const password = $('#password').val().trim();
+            const allowed_email = $('#allowed_email').val().trim();
+            const status = $('#status').val().trim();
+
+            // validation
+            if(name ===''){
+                errors.name='name is required!'
+                valid=false;
+
+            }
+
+            if (email === ''){
+                errors.email= 'email is required!'
+                valid=false;
+            }else if(!/^\S+@\S+\.\S+$/.test(email))
+            {
+                errors.email='Invalid email address!';
+                valid=false;
+            }
+
+            if(website===''){
+                errors.website='Website is required!'
+                valid=false;
+            }
+
+            const phonePattern= /^(\+92|0)?[3][0-9]{9}$/;
+            if(phone ===''){
+                errors.phone='Phone is required!'
+                valid=false;
+            } else if(phone.length < 11 || phone.length > 14)
+            {
+                errors.phone='Phone number must be be between 11 and 14 characters'
+
+                valid=false;
+            } else if (!phonePattern.test(phone)){
+                errors.phone='phone number should match the pattern +923xxxxxxxxx or 03xxxxxxxxx.'
+                valid=false
+
+            }
+
+            if(address ===''){
+                errors.address='Address is required!'
+                valid=false;
+            }
+
+            const passwordPattern=/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/;
+            if(password===''){
+                errors.password='Password is required!'
+                valid=false;
+            }else if(password.length < 8){
+                errors.password='Password must have at least 8 character long'
+                valid=false;
+            }
+            // else if(!passwordPattern.test(password)){
+            //     errors.password='Password must include one capital letter, one special character, and one number'
+            //     valid=false;
+            //
+            // }
+
+            if(allowed_email && !!/^\S+@\S+\.\S+$/.test(allowed_email)){
+                errors.allowed_email='If provided, Allowed email must be valid  email address!'
+                valid=false
+            }
+
+            if (status === '') {
+                errors.status = 'Status is required.';
+                valid = false;
+            } else if (!['active', 'inactive'].includes(status)) {
+                errors.status = 'Status must be either active or inactive.';
+                valid = false;
+            }
+
+            // display the errors if any
+            if(!valid){
+                showErrors(errors)
+            }else{
+                clearErrors();
+            }
+
+            return valid
+
+        }
+
         $(document).ready(function (){
+            $('#name, #email, #website, #phone, #address, #password, #allowed_email, #status').on('input change', function () {
+                validateForm();
+            });
                 $('#saveCompanyBtn').click( async function (e) {
                     e.preventDefault()
 
+                    const valid=validateForm();
+                    if(!valid){
+                        return
+                    }
                     const file=$('#logo')[0].files[0]
 
-                    if(file){
-                        $('#create-progress-container').show();
-                        function updateProgress(progress) {
-                            const progressBar = document.getElementById('create-progress-bar');
-                            console.log(progressBar)
 
-                            progressBar.style.width = progress + '%';
-                            progressBar.setAttribute('aria-valuenow', progress);
-                            progressBar.innerText = Math.round(progress) + '%';
-                        }
                      const onComplete=async (logo)=> {
 
 
@@ -472,43 +594,20 @@
                         });
 
                       }
+                    if(file){
+                        $('#create-progress-container').show();
+                        function updateProgress(progress) {
+                            const progressBar = document.getElementById('create-progress-bar');
+                            console.log(progressBar)
+
+                            progressBar.style.width = progress + '%';
+                            progressBar.setAttribute('aria-valuenow', progress);
+                            progressBar.innerText = Math.round(progress) + '%';
+                        }
                     // let containerID=document.getElementById('create-progress-container')'
                        await handleFileUpload(file, onComplete, updateProgress)
                     }else{
-                        const data = {
-
-                            name: $('#name').val(),
-                            email: $('#email').val(),
-                            phone: $('#phone').val(),
-                            address: $('#address').val(),
-                            website: $('#website').val(),
-                            password: $('#password').val(),
-                            allowed_email: $('#allowed_email').val(),
-                            status: $('#status').val(),
-
-                            _token: $('meta[name="csrf-token"]').attr('content')
-
-                        }
-
-                        $.ajax({
-                            url: '{{ route("companies.create") }}',
-                            type: 'POST',
-                            data: data,
-                            success: function (response) {
-                                // console.log(response);
-                                $('#addCompanyModal').modal('hide');
-                                location.reload()
-
-                            },
-                            error: function (error) {
-                                console.log(error)
-                                if (error.responseJSON && error.responseJSON.errors) {
-                                    showErrors(error.responseJSON.errors);
-                                } else {
-                                    alert('An error occurred: ' + error.statusText);
-                                }
-                            }
-                        });
+                       await onComplete(null)
 
                     }
 
@@ -550,31 +649,36 @@
                     });
                 }
             });
+            let companyIdToDelete = null;
+
+            // Show the delete confirmation modal and store the company ID
             $('.delete-btn').on('click', function () {
-                let companyId=$(this).data('company-id')
-                if(confirm('Are you sure you want to delete the company?')){
+                companyIdToDelete = $(this).data('company-id');
+                $('#deleteConfirmationModal').modal('show');
+            });
+
+            // Confirm delete action
+            $('#confirmDeleteBtn').on('click', function () {
+                if (companyIdToDelete !== null) {
                     $.ajax({
-                        url:'/companies/delete/' + companyId,
-                        method:"DELETE",
-                        data:{
-                            _token: '{{csrf_token()}}'
+                        url: '/companies/delete/' + companyIdToDelete,
+                        method: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}'
                         },
                         success: function (response) {
-                            // console.log(response);
-                        //     remove the row from table
-                            $('Company-', companyId).remove();
-                            location.reload()
-
+                            // Remove the row from the table
+                            $('#Company-' + companyIdToDelete).remove();
+                            $('#deleteConfirmationModal').modal('hide');
+                            location.reload();
+                            // Optionally, you might want to update the table or page content here
                         },
-                        error:function (error) {
-                            alert('error in deleting the company'+ error.setText)
-
+                        error: function (error) {
+                            alert('Error in deleting the company: ' + error.statusText);
                         }
-
-                    })
+                    });
                 }
-
-            })
+            });
             $('#updateCompanyModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 // var action = button.data('action');

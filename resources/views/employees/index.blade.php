@@ -151,37 +151,49 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Employee Details Here -->
-                    <div class="form-group text-center">
-{{--                        <label for="view-profile">Profile</label>--}}
-                        <img id="view-profile" src="" alt="Profile Image" class="img-thumbnail rounded" style="max-width: 150px">
+                    <div class="d-flex justify-content-between">
+
+                        <!-- Text Details -->
+                        <div class="d-flex flex-column mt-3">
+                            <div class="form-group">
+                                <label for="view-name">Name</label>
+                                <p id="view-name"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="view-email">Email</label>
+                                <p id="view-email"></p>
+                            </div>
+                        </div>
+
+                        <!-- Profile Image -->
+                        `<div class="form-group">
+                            <img id="view-profile" src="" alt="https://firebasestorage.googleapis.com/v0/b/employee-management-4cde8.appspot.com/o/alt%20images%2Fuser_icon_001.jpg?alt=media&token=6e12626e-f597-4c50-8834-0fc25c8acb3a" class="img-thumbnail rounded" style="max-width: 200px; margin-right: 40px">
+                        </div>`
                     </div>
 
-                    <div class="form-group">
-                        <label for="view-name">Name</label>
-                        <p id="view-name"></p>
+                    <!-- Additional Fields in Two Columns -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="view-phone">Phone</label>
+                                <p id="view-phone"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="view-company">Company</label>
+                                <p id="view-company"></p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="view-email">Email</label>
-                        <p id="view-email"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="view-phone">Phone</label>
-                        <p id="view-phone"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="view-company">Company</label>
-                        <p id="view-company"></p>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label for="view-status">Status</label>
-                        <p id="view-status"></p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="view-status">Status</label>
+                                <p id="view-status"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -191,9 +203,11 @@
         </div>
     </div>
 
+
+    <!-- Update Employee Modal -->
     <!-- Update Employee Modal -->
     <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="updateEmployeeModalLabel">Update Employee Details</h5>
@@ -206,21 +220,30 @@
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <input type="hidden" id="update-employee-id">
 
+                        <div class="d-flex justify-content-between">
+                            <!-- Text Fields Area -->
+                            <div class="d-flex flex-column flex-grow-1">
+                                <div class="form-group">
+                                    <label for="update-name">Name</label>
+                                    <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="update-email">Email</label>
+                                    <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <!-- Profile Image -->
+                            <div class="ml-3">
+                                <div class="form-group text-center">
+                                    <img id="update-profile-img" src="" alt="" class="img-thumbnail rounded" style="max-width: 200px; margin-right: 35px">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Additional Fields in Two Columns -->
                         <div class="row">
-                            <div class="col-12 text-center mb-3">
-                                <img id="update-profile-img" src="" alt="Profile Image" class="img-thumbnail rounded" style="max-width: 150px;">
-                            </div>
-
-                            <div class="col-md-6 form-group">
-                                <label for="update-name">Name</label>
-                                <input type="text" class="form-control" id="update-name" name="name" placeholder="Name" required>
-                            </div>
-
-                            <div class="col-md-6 form-group">
-                                <label for="update-email">Email</label>
-                                <input type="email" class="form-control" id="update-email" name="email" placeholder="Email" required>
-                            </div>
-
                             <div class="col-md-6 form-group">
                                 <label for="update-phone">Phone</label>
                                 <input type="text" class="form-control" id="update-phone" name="phone" placeholder="Phone">
@@ -247,7 +270,7 @@
                             </div>
 
                             <div class="col-12 form-group">
-                                <label for="update-profile">Update Profile Image</label>
+                                <label for="update-profile">Update Profile Image(Optional)</label>
                                 <input type="file" class="form-control" id="update-profile" name="profile_img">
                             </div>
                         </div>
@@ -266,6 +289,29 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this employee?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -333,6 +379,89 @@
             });
         }
 
+        function clearErrors(){
+            $('.form-group').find('.text-danger').remove();
+            $('.is-invalid').removeClass('is-invalid');
+        }
+
+        // function  validate form
+
+        function validateForm(){
+            let errors={};
+            let valid=true;
+
+           const name= $('#name').val();
+           const email= $('#email').val();
+           const phone= $('#phone').val();
+           const password= $('#password').val();
+           const company_id= $('#company').val();
+           const status= $('#status').val();
+
+
+           if(name===''){
+               errors.name='Name is required!'
+               valid=false
+           }
+
+            if (email === ''){
+                errors.email= 'email is required!'
+                valid=false;
+            }else if(!/^\S+@\S+\.\S+$/.test(email))
+            {
+                errors.email='Invalid email address!';
+                valid=false;
+            }
+
+            const phonePattern= /^(\+92|0)?[3][0-9]{9}$/;
+            if(phone ===''){
+                errors.phone='Phone is required!'
+                valid=false;
+            } else if(phone.length < 11 || phone.length > 14)
+            {
+                errors.phone='Phone number must be be between 11 and 14 characters'
+
+                valid=false;
+            } else if (!phonePattern.test(phone)){
+                errors.phone='phone number should match the pattern +923xxxxxxxxx or 03xxxxxxxxx.'
+                valid=false
+
+            }
+
+            const passwordPattern=/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/;
+            if(password===''){
+                errors.password='Password is required!'
+                valid=false;
+            }else if(password.length < 8){
+                errors.password='Password must have at least 8 character long'
+                valid=false;
+            }
+            // else if(!passwordPattern.test(password)){
+            //     errors.password='Password must include one capital letter, one special character, and one number'
+            //     valid=false;
+            //
+            // }
+            if (status === '') {
+                errors.status = 'Status is required.';
+                valid = false;
+            } else if (!['active', 'inactive'].includes(status)) {
+                errors.status = 'Status must be either active or inactive.';
+                valid = false;
+            }
+
+            if(company_id===''){
+                errors.company='Please the Company'
+            }
+
+            if(!valid){
+                showErrors(errors)
+            }else{
+                clearErrors();
+            }
+
+            return valid
+
+        }
+
 
         $(document).ready(function() {
             $('#addEmployeeModal').on('show.bs.modal', function (event) {
@@ -363,24 +492,25 @@
                     }
                 });
             });
+            $('#name, #email, #phone,#password, #status, #company').on('input change', function () {
+                validateForm();
+            });
             $('#saveEmployeeBtn').click(async function(e){
                 e.preventDefault()
 
+                $(this).prop('disabled', true)
 
+                const valid=validateForm();
+                if(!valid){
+                    $(this).prop('disabled', false)
+                    return;
+
+                }
 
                 const file = document.getElementById('profile').files[0];
 
 
-                if(file){
-                    $('#create-progress-container').show();
 
-                    function updateProgress(progress) {
-                        const progressBar = document.getElementById('create-progress-bar');
-
-                        progressBar.style.width = progress + '%';
-                        progressBar.setAttribute('aria-valuenow', progress);
-                        progressBar.innerText = Math.round(progress) + '%';
-                    }
 
                   const onComplete = async (profile) =>{
 
@@ -418,37 +548,19 @@
 
 
                   };
+                if(file){
+                    $('#create-progress-container').show();
+
+                    function updateProgress(progress) {
+                        const progressBar = document.getElementById('create-progress-bar');
+
+                        progressBar.style.width = progress + '%';
+                        progressBar.setAttribute('aria-valuenow', progress);
+                        progressBar.innerText = Math.round(progress) + '%';
+                    }
                   await handleFileUpload(file, onComplete,updateProgress)
                 }else{
-                    let data = {
-                        name: $('#name').val(),
-                        email: $('#email').val(),
-                        phone: $('#phone').val(),
-                        password: $('#password').val(),
-                        company_id: $('#company').val(),
-                        status: $('#status').val(),
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    }
-
-                    $.ajax({
-                        url: '{{ route("employees.create") }}',
-                        type: 'POST',
-                        data: data,
-                        success: function (response) {
-                            console.log(response);
-                            $('#addEmployeeModal').modal('hide');
-                            location.reload()
-
-                        },
-                        error: function (error) {
-                            if (error.responseJSON && error.responseJSON.errors) {
-                                showErrors(error.responseJSON.errors);
-                            } else {
-                                alert('An error occurred: ' + error.statusText);
-                            }
-
-                        }
-                    })
+                    await onComplete(null)
 
                 }
 
@@ -468,7 +580,10 @@
                         $('#view-email').text(employee.email);
                         $('#view-phone').text(employee.phone);
                         $('#view-company').text(employee.company.name);
-                        $('#view-profile').attr('src', employee.profile_img);
+                        // Set profile image with fallback
+                        const defaultProfileImg = 'https://firebasestorage.googleapis.com/v0/b/employee-management-4cde8.appspot.com/o/alt%20images%2Fuser_icon_001.jpg?alt=media&token=6e12626e-f597-4c50-8834-0fc25c8acb3a';
+                        const profileImgSrc = employee.profile_img ? employee.profile_img : defaultProfileImg;
+                        $('#view-profile').attr('src', profileImgSrc);
                         $('#view-status').text(employee.status ? 'Active' : 'Inactive');
                     },
                     error: function (error) {
@@ -476,31 +591,32 @@
                     }
                 });
             });
+            let employeeIdToDelete;
+
             $('.delete-btn').on('click', function() {
-                // e.preventDefault();
+                employeeIdToDelete = $(this).data('id');
+                $('#confirmDeleteModal').modal('show');
+            });
 
-                const employeeId = $(this).data('id');
-                // console.log(employeeId)
-
-                if (confirm('Are you sure you want to delete this employee?')) {
-                    $.ajax({
-                        url: '{{ url('employees/delete') }}/' +employeeId,
-                        type: 'DELETE',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // Remove the row from the table
-                            $('#employee-' + employeeId).remove();
-                            location.reload();
-                            // alert('Employee deleted successfully.');
-                        },
-                        error: function(error) {
-                            // console.error('Error deleting employee:', error);
-                            alert('An error occurred while deleting the employee.'+ error.setText);
-                        }
-                    });
-                }
+            $('#confirmDeleteBtn').on('click', function() {
+                $(this).prop('disabled', true)
+                $.ajax({
+                    url: '{{ url('employees/delete') }}/' + employeeIdToDelete,
+                    type: 'DELETE',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        // Remove the row from the table
+                        $('#employee-' + employeeIdToDelete).remove();
+                        $('#confirmDeleteModal').modal('hide');
+                    },
+                    error: function(error) {
+                        // Handle the error
+                        alert('An error occurred while deleting the employee: ' + error.responseText);
+                        $('#confirmDeleteModal').modal('hide');
+                    }
+                });
             });
             $('#updateEmployeeModal').on('show.bs.modal', function (event) {
                 const button = $(event.relatedTarget); // Button that triggered the modal
@@ -518,7 +634,11 @@
                         $('#update-email').val(employee.email);
                         $('#update-phone').val(employee.phone);
                         $('#update-password').val(employee.password);
-                        $('#update-profile-img').attr('src', employee.profile_img);
+                        // Set profile image with fallback
+                        const defaultProfileImg = 'https://firebasestorage.googleapis.com/v0/b/employee-management-4cde8.appspot.com/o/alt%20images%2Fuser_icon_001.jpg?alt=media&token=6e12626e-f597-4c50-8834-0fc25c8acb3a';
+                        const profileImgSrc = employee.profile_img ? employee.profile_img : defaultProfileImg;
+                        $('#update-profile-img').attr('src', profileImgSrc);
+
                         $('#update-company').empty().append('<option value="">Select Company</option>');
                         if(employee.status===0){
                             $('#update-status').val('inactive');
@@ -543,6 +663,7 @@
                 });
             });
             $('#updateEmployeeBtn').click( async function () {
+                $(this).prop('disabled', true)
 
                 var id = $('#update-employee-id').val();
                 var profile_img= '{{$employee->profile_img}}';

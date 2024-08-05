@@ -41,15 +41,15 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'company_id'       => 'required|integer|exists:companies,id',
-            'name'             => 'required|string|max:255',
-            'email'            => 'required|email|unique:employees,email',
-            'phone'            => 'required|string|max:20',
-            'password'         => 'required|string',
-            'profile_img'    => 'string',
-            'status'           => 'required',
-        ]);
+//        $request->validate([
+//            'company_id'       => 'required|integer|exists:companies,id',
+//            'name'             => 'required|string|max:255',
+//            'email'            => 'required|email|unique:employees,email',
+//            'phone'            => 'required|string|max:20',
+//            'password'         => 'required|string',
+//            'profile_img'    => 'string',
+//            'status'           => 'required',
+//        ]);
 
         $status=false;
 

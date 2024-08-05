@@ -42,21 +42,21 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'name'             => 'required|string|max:255',
-            'email'            => 'required|string|email|max:255',
-            'logo'             => 'string|max:255',
-            'website'          => 'required|string|max:255',
-            'phone'            => 'required|string|max:20',
-            'address'          => 'required|string|max:255',
-            'password'         => 'required|string|min:8',
-            'screenshot_time'  => 'nullable|date_format:H:i:s',
-            'no_of_employees'  => 'nullable|integer|min:1',
-            'allowed_email'    => 'nullable|string|email|max:255',
-            'status'           => 'required|string|in:active,inactive',
-
-        ]);
+//        //
+//        $request->validate([
+//            'name'             => 'required|string|max:255',
+//            'email'            => 'required|string|email|max:255',
+//            'logo'             => 'string|max:255',
+//            'website'          => 'required|string|max:255',
+//            'phone'            => 'required|string|max:20',
+//            'address'          => 'required|string|max:255',
+//            'password'         => 'required|string|min:8',
+//            'screenshot_time'  => 'nullable|date_format:H:i:s',
+//            'no_of_employees'  => 'nullable|integer|min:1',
+//            'allowed_email'    => 'nullable|string|email|max:255',
+//            'status'           => 'required|string|in:active,inactive',
+//
+//        ]);
 
 //        $status=null;
         if($request->input('status')==='active'){
@@ -117,20 +117,20 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
-            'name'             => 'string|max:255',
-            'email'            => 'string|email|max:255',
-            'logo'             => 'string|max:255',
-            'website'          => 'string|max:255',
-            'phone'            => 'string|max:20',
-            'address'          => 'string|max:255',
-            'password'         => 'nullable|string|min:8',
-            'screenshot_time'  => 'nullable|date_format:H:i:s',
-            'no_of_employees'  => 'nullable|integer|min:1',
-            'allowed_email'    => 'nullable|string|email|max:255',
-            'status'           => 'boolean',
-
-        ]);
+//        $request->validate([
+//            'name'             => 'string|max:255',
+//            'email'            => 'string|email|max:255',
+//            'logo'             => 'string|max:255',
+//            'website'          => 'string|max:255',
+//            'phone'            => 'string|max:20',
+//            'address'          => 'string|max:255',
+//            'password'         => 'nullable|string|min:8',
+//            'screenshot_time'  => 'nullable|date_format:H:i:s',
+//            'no_of_employees'  => 'nullable|integer|min:1',
+//            'allowed_email'    => 'nullable|string|email|max:255',
+//            'status'           => 'boolean',
+//
+//        ]);
 
 
         $company=Company::find($id);
