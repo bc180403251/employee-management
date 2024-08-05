@@ -16,6 +16,19 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
+    @endif
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid ">
@@ -174,11 +187,11 @@
 
     <!-- View Company Modal -->
     <div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="companyModalLabel" aria-hidden="true">
-        <div class="modal-dialog mdal" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="companyModalLabel">View Company</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -253,9 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -269,7 +280,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="updateCompanyModalLabel">Update Company</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -349,7 +360,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="updateCompanyBtn">Save Changes</button>
                 </div>
             </div>
@@ -362,15 +372,16 @@
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     Are you sure you want to delete this company?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                 </div>
             </div>
@@ -484,19 +495,15 @@
                 valid=false;
             }
 
-            const phonePattern= /^(\+92|0)?[3][0-9]{9}$/;
+            // const phonePattern= /^(\+92|0)?[3][0-9]{9}$/;9
             if(phone ===''){
                 errors.phone='Phone is required!'
                 valid=false;
-            } else if(phone.length < 11 || phone.length > 14)
+            } else if(phone.length >12)
             {
-                errors.phone='Phone number must be be between 11 and 14 characters'
+                errors.phone='Phone number must be less then 12 characters '
 
                 valid=false;
-            } else if (!phonePattern.test(phone)){
-                errors.phone='phone number should match the pattern +923xxxxxxxxx or 03xxxxxxxxx.'
-                valid=false
-
             }
 
             if(address ===''){
@@ -637,10 +644,13 @@
                             // $('#view-status').text(response.company.status);
                             $('#view-logo').attr('src', response.company.logo);
 
-                            if (response.company.status === 0) {
-                                $('#view-status').val('inactive');
+                            let status= response.company.status
+                            
+
+                            if (status === 0) {
+                                $('#view-status').text('Inactive');
                             } else {
-                                $('#view-status').val('active');
+                                $('#view-status').text('Active');
                             }
                         },
                         error: function (error) {
@@ -722,16 +732,15 @@
                     var phone = $('#update-phone').val();
                     var address = $('#update-address').val();
                    var  website = $('#update-website').val();
-                    var password = $('#update-password').val();
                     var allowed_email = $('#update-allowed_email').val();
                    var  status = $('#update-status').val() === 'active' ? 1 : 0;
 
 
                    let newLogo=$('#update-logo-input')[0].files[0];
                    if(newLogo){
-                       $('#create-progress-container').show();
+                       $('#update-progress-container').show();
                        function updateProgress(progress) {
-                           const progressBar = document.getElementById('create-progress-bar');
+                           const progressBar = document.getElementById('update-progress-bar');
                            console.log(progressBar)
 
                            progressBar.style.width = progress + '%';

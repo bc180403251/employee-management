@@ -14,6 +14,19 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+    @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
+    @endif
 
     <!-- Main content -->
     <div class="content">
@@ -82,7 +95,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -133,7 +146,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="saveEmployeeBtn">Add Employee</button>
                 </div>
             </div>
@@ -146,7 +158,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="viewEmployeeModalLabel">View Employee Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -196,22 +208,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
         </div>
     </div>
 
 
-    <!-- Update Employee Modal -->
+
     <!-- Update Employee Modal -->
     <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="updateEmployeeModalLabel">Update Employee Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -283,8 +293,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateEmployeeBtn">Update</button>
+                    <button type="button" class="btn btn-primary" id="updateEmployeeBtn">save Changes</button>
                 </div>
             </div>
         </div>
@@ -295,9 +304,9 @@
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -305,7 +314,6 @@
                     Are you sure you want to delete this employee?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                 </div>
             </div>
@@ -412,19 +420,15 @@
                 valid=false;
             }
 
-            const phonePattern= /^(\+92|0)?[3][0-9]{9}$/;
+
             if(phone ===''){
                 errors.phone='Phone is required!'
                 valid=false;
-            } else if(phone.length < 11 || phone.length > 14)
+            } else if(phone.length >12)
             {
-                errors.phone='Phone number must be be between 11 and 14 characters'
+                errors.phone='Phone number must be less then 12 characters'
 
                 valid=false;
-            } else if (!phonePattern.test(phone)){
-                errors.phone='phone number should match the pattern +923xxxxxxxxx or 03xxxxxxxxx.'
-                valid=false
-
             }
 
             const passwordPattern=/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/;
@@ -610,6 +614,7 @@
                         // Remove the row from the table
                         $('#employee-' + employeeIdToDelete).remove();
                         $('#confirmDeleteModal').modal('hide');
+                        location.reload();
                     },
                     error: function(error) {
                         // Handle the error

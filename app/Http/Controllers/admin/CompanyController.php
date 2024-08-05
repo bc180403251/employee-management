@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\DataTables;
 
 class CompanyController extends Controller
@@ -15,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies=Company::paginate(10);
+        $companies=Company::orderBy('created_at','desc')->paginate(10);
         //
         return view('companies.index2', compact('companies'));
     }
@@ -81,6 +82,8 @@ class CompanyController extends Controller
 
         $company->save();
 
+        Session::flash('message','Company Added Successfully!');
+
         return response()->json([
             'message'=>'company added successfully!',
             'company'=> $company
@@ -145,6 +148,7 @@ class CompanyController extends Controller
 
         $company->save();
 
+        Session::flash('message','Company Updated SuccessFully!');
         return response()->json([
             'message'=> 'company updated Successfully!',
             'company'=>$company
@@ -164,6 +168,7 @@ class CompanyController extends Controller
         }
 
         $company->delete();
+        Session::flash('message','Company Deleted Successfully!');
 
         return response()->json(['message' => 'Company is deleted Successfully', 'company' => $company]);
 

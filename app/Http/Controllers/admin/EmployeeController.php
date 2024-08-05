@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
@@ -16,7 +17,7 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        $employees=Employee::with('company')->paginate(10);
+        $employees=Employee::orderBy('created_at','desc')->with('company')->paginate(10);
 
         return view('employees.index',compact('employees'));
     }
@@ -77,6 +78,7 @@ class EmployeeController extends Controller
         }
 
 
+        Session::flash('message','Employee Added Successfully!');
 
         return response()->json(['message'=>'Employee Added Successfully!']);
     }
@@ -129,6 +131,7 @@ class EmployeeController extends Controller
 
         $employee->save();
 
+        Session::flash('message','Employee Updated Successfully!');
         return response()->json([
             'message'=>'employee updated successfully!'
         ]);
@@ -150,6 +153,7 @@ class EmployeeController extends Controller
         }
         $employee->delete();
 
+        Session::flash('message','Employee DeletedSuccessfully!');
         return response()->json([
             'message'=>'employee deleted successfully!'
         ]);
