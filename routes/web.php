@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\EmployeeController;
+use App\Http\Controllers\admin\MonitorLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,4 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('employees/delete/{id}',[EmployeeController::class,'destroy'])->name('employees.delete');
     Route::get('employee/getUpdate/{id}',[EmployeeController::class, 'edit'])->name('employees.getUpdate');
     Route::patch('employees/update/{id}',[EmployeeController::class, 'update'])->name('employees.update');
+
+//    Monitor_logs CRUDS Routes
+
+    Route::get('logs/list',[MonitorLogController::class, 'index'])->name('logs.list');
 });

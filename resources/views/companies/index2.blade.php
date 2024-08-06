@@ -63,10 +63,12 @@
                                         <td>{{ $company->address }}</td>
                                         <td>{{ $company->no_of_employees }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#companyModal" data-action="view" data-id="{{ $company->id }}">View</button>
-                                            <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" data-target="#updateCompanyModal" data-action="update" data-id="{{ $company->id }}">Update</button>
-                                            <button type="button" class="btn btn-danger btn-sm mx-1 delete-btn" data-company-id="{{ $company->id }}">{{ __('Delete') }}</button>
+                                            <div class="d-flex flex-row text-center">
+                                               <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#companyModal" data-action="view" data-id="{{ $company->id }}">View</button>
+                                               <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" data-target="#updateCompanyModal" data-action="update" data-id="{{ $company->id }}">Update</button>
+                                               <button type="button" class="btn btn-danger btn-sm m-1 delete-btn" data-company-id="{{ $company->id }}">{{ __('Delete') }}</button>
 
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -645,7 +647,7 @@
                             $('#view-logo').attr('src', response.company.logo);
 
                             let status= response.company.status
-                            
+
 
                             if (status === 0) {
                                 $('#view-status').text('Inactive');

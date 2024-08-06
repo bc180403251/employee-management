@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Monitor_logs;
 use Illuminate\Http\Request;
 
 class MonitorLogController extends Controller
@@ -13,6 +14,10 @@ class MonitorLogController extends Controller
     public function index()
     {
         //
+        $logs=Monitor_logs::orderBy('created_at','desc')->with('employees')->paginate(10);
+
+        return view('logs.index', compact('logs'));
+
     }
 
     /**

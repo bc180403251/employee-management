@@ -45,9 +45,6 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Company</th>
-{{--                                    <th>Profile</th>--}}
-{{--                                    <th>Status</th>--}}
-{{--                                    <th>Password</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -59,15 +56,14 @@
                                         <td>{{ $employee->email }}</td>
                                         <td>{{ $employee->phone }}</td>
                                         <td>{{ $employee->company->name }}</td>
-{{--                                        <td>{{ $employee->profile_img }}</td>--}}
-{{--                                        <td>{{ $employee->status }}</td>--}}
-{{--                                        <td>{{ $employee->password }}</td>--}}
 
                                         <td>
-                                            <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#viewEmployeeModal" data-action="view" data-id="{{ $employee->id }}">View</button>
-                                            <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" data-target="#updateEmployeeModal" data-action="update" data-id="{{ $employee->id }}">Update</button>
-                                            <button type="button" class="btn btn-danger btn-sm mx-1 delete-btn" data-id="{{ $employee->id }}">{{ __('Delete') }}</button>
-                                            {{--                                            <button type="button" class="btn btn-danger btn-sm m-1" data-id="{{ $company->id }}" onclick="deleteCompany({{ $company->id }})">Delete</button>--}}
+                                            <div class="d-flex flex-row">
+                                                <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#viewEmployeeModal" data-action="view" data-id="{{ $employee->id }}">View</button>
+                                                <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" data-target="#updateEmployeeModal" data-action="update" data-id="{{ $employee->id }}">Update</button>
+                                                <button type="button" class="btn btn-danger btn-sm mx-1 delete-btn" data-id="{{ $employee->id }}">{{ __('Delete') }}</button>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 @endforeach

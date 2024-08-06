@@ -45,6 +45,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('employees.list') }}" class="nav-link">
+                    <i class="nav-icon bi bi-eye-fill"></i>
+                    <p>
+                        {{ __('Monitor Logs') }}
+                    </p>
+                </a>
+            </li>
 
         </ul>
     </nav>
